@@ -55,6 +55,7 @@ class ProfileView(APIView):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class HomeView(TemplateView):
     template_name = 'home.html'
 
@@ -64,8 +65,15 @@ class HomeView(TemplateView):
         if self.request.user.is_authenticated:
             user = self.request.user
             context['email'] = user.email
-            context['name'] = user.first_name
+            context['first_name'] = user.first_name
+            context['last_name'] = user.last_name
             context['role'] = user.role  # Assuming 'role' is a field in your User model
+            
+            # Assuming you have a shop associated with the user
+            # Replace 'shop' with the actual logic to fetch the shop details
+            shop = user  # Replace with actual related name or fetch logic
+            if shop:
+                context['shop'] = shop
             
         categories = [
             {
@@ -96,7 +104,6 @@ class HomeView(TemplateView):
         if not request.user.is_authenticated:
             return redirect(reverse('user_login'))  # Adjust 'user_login' to your login URL name
         return super().dispatch(request, *args, **kwargs)
-
 
 def login_view(request):
     if request.method == 'POST':

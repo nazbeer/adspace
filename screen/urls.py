@@ -26,5 +26,7 @@ urlpatterns = [
     path('screen_types/<int:pk>/', screen_type_detail, name='screen_type_detail'),
     path('screen_types/create/', screen_type_create, name='screen_type_create'),
     
-  
+    path('areas/', area_list, name='area_list'),
+    path('areas/<int:pk>/', area_detail, name='area_detail'),
+    path('areas/create/', area_create, name='area_create'),
 ]

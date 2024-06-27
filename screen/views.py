@@ -3,6 +3,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.serializers import ValidationError
 from rest_framework.views import APIView
+from django.urls import reverse
 from rest_framework import status
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
@@ -292,7 +293,7 @@ def screen_type_create(request):
         form = ScreenTypeForm(request.POST)
         if form.is_valid():
             screen_type = form.save()
-            return redirect('screen_type_detail', pk=screen_type.pk)
+            return redirect('screen_type_list', {'screen_type': screen_type})
     else:
         form = ScreenTypeForm()
     return render(request, 'screen_type_form.html', {'form': form})
@@ -314,3 +315,26 @@ def screen_type_delete(request, pk):
         screen_type.delete()
         return redirect('screen_type_list')
     return render(request, 'screen_type_confirm_delete.html', {'screen_type': screen_type})
+
+
+# List all areas
+def area_list(request):
+    areas = Area.objects.all()
+    return render(request, 'area_list.html', {'areas': areas})
+
+# View details of a specific area
+def area_detail(request, pk):
+    area = get_object_or_404(Area, pk=pk)
+    return render(request, 'area_detail.html', {'area': area})
+
+# Create a new area
+def area_create(request):
+    if request.method == 'POST':
+        form = AreaForm(request.POST)
+        if form.is_valid():
+            area = form.save()  # Save the form data to create a new Area object
+            return redirect(reverse('area_list', {'area': area}))  # Redirect to the detail view of the created area
+    else:
+        form = AreaForm()
+    
+    return render(request, 'area_create.html', {'form': form})

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Area Detail: {{ area.name }}{% endblock %}
+{% block content %}
+<div class="container">
+    <h1>Area Detail: {{ area.name }}</h1>
+    <p>Description: {{ area.description }}</p>
+    <p>Location: {{ area.location }}</p>
+    <!-- Add more fields as needed -->
+</div>
+{% endblock %}

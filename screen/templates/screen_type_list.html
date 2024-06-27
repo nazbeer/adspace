@@ -36,19 +36,43 @@
           </thead>
           <tbody>
             {% for screen_type in screen_types %}
-              <tr>
+              <tr data-toggle="modal" data-target="#screenTypeModal{{ screen_type.id }}">
                 <td>{{ screen_type.id }}</td>
                 <td>{{ screen_type.name }}</td>
-                <td>{{ screen_type.description }}</td>
-                <td>{{ screen_type.status }}</td>
+                <td width="150px">{{ screen_type.description }}</td>
+                <td class="text-capitalize">{{ screen_type.status }}</td>
                 <td>{{ screen_type.created_on }}</td>
                 <td>{{ screen_type.updated_on }}</td>
-                <td>
-                  <a href="{% url 'screen_type_detail' screen_type.id %}" class="btn btn-primary btn-sm">View</a>
-                  {%comment%}<!-- <a href="{% url 'screen_type_edit' screen_type.id %}" class="btn btn-info btn-sm">Edit</a> -->{%endcomment%}
+                <td class="text-center">
+                  <a href="#" class=" btn-success btn-sm"><i class="fas fa-eye"></i></a>
                   <!-- Add delete functionality if needed -->
                 </td>
               </tr>
+              
+              <!-- Modal for Screen Type Details -->
+              <div class="modal fade" id="screenTypeModal{{ screen_type.id }}" tabindex="-1" role="dialog" aria-labelledby="screenTypeModalLabel{{ screen_type.id }}" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title text-white mb-0" id="screenTypeModalLabel{{ screen_type.id }}">{{ screen_type.name }}</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body bg-white">
+                      <p class=""><strong>Description:</strong><br/> <span class="text-right">{{ screen_type.description }}</span></p>
+                      <p class="d-flex justify-content-between align-items-center"><strong>Status:</strong> {{ screen_type.get_status_display }}</p>
+                      <p  class="d-flex justify-content-between align-items-center"><strong>Created On:</strong> {{ screen_type.created_on }}</p>
+                      <p  class="d-flex justify-content-between align-items-center"><strong>Updated On:</strong> {{ screen_type.updated_on }}</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- End Modal -->
+              
             {% endfor %}
           </tbody>
         </table>
@@ -60,7 +84,7 @@
 
 <script>
   $(document).ready(function() {
-    // Initialize DataTable
+    // Initialize DataTable with modal integration
     $('#screenTypeList').DataTable({
       responsive: true,
       dom: 'lBfrtip',
@@ -80,6 +104,14 @@
           }
         }
       ]
+    });
+
+    // Trigger modal display on row click
+    $('#screenTypeList tbody').on('click', 'tr', function() {
+      var dataTarget = $(this).attr('data-target');
+      if (dataTarget && $(dataTarget).length > 0) {
+        $(dataTarget).modal('show');
+      }
     });
   });
 </script>

@@ -60,17 +60,15 @@
                 {% else %}
                 {% if shop %}
                 <div class="row">
-                    <div class="col-md-6">
+                    <!-- <div class="col-md-6">
                         <p class="mb-0"><strong>Shop Name:</strong> {{ shop.name }} - ({{ shop.id }})</p>
                     </div>
+                    -->
                     <div class="col-md-6">
-                        <p class="mb-0"><strong>License Number:</strong> {{ shop.license_number }}</p>
+                        <p class="mb-0"><strong>Email:</strong> {{ shop.email }}</p>
                     </div>
                     <div class="col-md-6">
-                        <p class="mb-0"><strong>Email:</strong> {{ user.email }}</p>
-                    </div>
-                    <div class="col-md-6">
-                        <p class="mb-0"><strong>Username:</strong> {{ user.username }}</p>
+                        <p class="mb-0 text-capitalize"><strong>Full Name:</strong> {{ shop.first_name }} {{shop.last_name }}</p>
                     </div>
                 </div>
                 {% else %}

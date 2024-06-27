@@ -1,50 +1,78 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<style>
+  textarea.form-control-lg {
+    min-height: calc(1.5em + 3rem + calc(var(--bs-border-width) * 2));
+    line-height:auto  !important;
+    font-size: 14px !important;
+    padding-top:10px !important;
+    padding-bottom:10px !important;
+    margin-left:0 !important;
+}
+</style>
 <div class="container mt-4">
   <div class="card mt-4">
     <div class="card-header">
-      <h4 class="card-title">{% if form.instance.pk %}Edit Screen Type{% else %}Create New Screen Type{% endif %}</h4>
+      <h4 class="card-title mb-0">{% if form.instance.pk %}Edit Screen Type{% else %}Create New Screen Type{% endif %}</h4>
     </div>
-    <div class="card-body">
-      <form method="post">
-        {% csrf_token %}
+    <form method="post">
+      {% csrf_token %}
+      <div class="card-body">
         <div class="form-group">
-          {{ form.name.label_tag }}
-          {{ form.name }}
-          {% if form.name.errors %}
-            <div class="text-danger">
-              {% for error in form.name.errors %}
-                <span>{{ error }}</span>
-              {% endfor %}
+          <label for="id_name">{{ form.name.label }}</label>
+          <input type="text" id="id_name" name="name" class="form-control {% if form.name.errors %}is-invalid{% endif %}" >
+          {% for error in form.name.errors %}
+            <div class="invalid-feedback">
+              {{ error }}
             </div>
-          {% endif %}
+          {% endfor %}
         </div>
         <div class="form-group">
-          {{ form.description.label_tag }}
-          {{ form.description }}
+          <label for="id_description">{{ form.description.label }}</label>
+          <textarea id="id_description" name="description" rows="7" class="form-control-lg {% if form.description.errors %}is-invalid{% endif %}" rows="4" maxlength="250"></textarea>
           {% if form.description.errors %}
-            <div class="text-danger">
+            <div class="invalid-feedback">
               {% for error in form.description.errors %}
-                <span>{{ error }}</span>
+                {{ error }}
               {% endfor %}
             </div>
           {% endif %}
+          <small class="form-text text-muted">
+            <span id="remainingChars">250</span> characters remaining
+          </small>
         </div>
-        <div class="form-group">
-          {{ form.status.label_tag }}
-          {{ form.status }}
-          {% if form.status.errors %}
-            <div class="text-danger">
-              {% for error in form.status.errors %}
-                <span>{{ error }}</span>
-              {% endfor %}
-            </div>
-          {% endif %}
-        </div>
+        <input type="hidden" name="status" id="id_status" value="active"/>
+      </div>
+      <div class="card-footer">
         <button type="submit" class="btn btn-primary">Save</button>
-      </form>
-    </div>
+      </div>
+    </form>
   </div>
 </div>
+
+<script>
+  // Function to update remaining characters count in description textarea
+  document.addEventListener('DOMContentLoaded', function() {
+    var maxChars = 250;
+    var description = document.getElementById('id_description');
+    var remainingChars = document.getElementById('remainingChars');
+
+    // Initialize remaining characters count
+    remainingChars.textContent = maxChars - description.value.length;
+
+    // Event listener for input in description textarea
+    description.addEventListener('input', function() {
+      var remaining = maxChars - this.value.length;
+      remainingChars.textContent = remaining;
+
+      // Show remaining characters in red if nearing limit
+      if (remaining < 10) {
+        remainingChars.classList.add('text-danger');
+      } else {
+        remainingChars.classList.remove('text-danger');
+      }
+    });
+  });
+</script>
 {% endblock %}

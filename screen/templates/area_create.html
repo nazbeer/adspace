@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %}Create New Area{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title mb-0">Create New Area</h4>
+        </div>
+        <form method="post">
+        <div class="card-body">
+            
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="id_name">Area Name:</label>
+                            <input type="text" id="id_name" name="name" class="form-control" required tabindex="1">
+                            <input type="hidden" name="status"  id="id_status" value="active"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6 d-none">
+                        <div class="form-group d-none">
+                            <label for="id_status">Status:</label>
+                            <!-- <select id="id_status" name="status" class="form-control" tabindex="5">
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                            </select> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="id_description">Description:</label>
+                            <textarea id="id_description" name="description" class="form-control" rows="4" tabindex="2"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="id_location">Location:</label>
+                            <input type="text" id="id_location" name="location" class="form-control" tabindex="6">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="id_latitude">Latitude:</label>
+                            <input type="text" id="id_latitude" name="latitude" class="form-control" tabindex="3">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="id_longitude">Longitude:</label>
+                            <input type="text" id="id_longitude" name="longitude" class="form-control" tabindex="4">
+                        </div>
+                    </div>
+                </div>
+               
+            
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary" tabindex="7">Save</button>
+        </div>
+    </form>
+    </div>
+</div>
+{% endblock %}
