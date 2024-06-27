@@ -1,0 +1,70 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'js/style.css' %}">
+    <!-- Bootstrap CSS (adjust the version as needed) -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #f8f9fa; /* Bootstrap background color */
+        }
+        .card {
+            min-width: 500px;
+        }
+        @media screen and (max-width: 767px) {
+            .card {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid" style="background: url('https://img.freepik.com/free-photo/person-looking-finance-graphs_52683-116600.jpg'); background-size: cover;">
+        <div class="main-content d-flex flex-column px-0">
+            <div class="m-auto py-4">
+                <div class="row">
+                    <div class="text-center align-items-center justify-content-center gap-4 mb-2">
+                        <h4 class="fs-3 mb-2 text-white">Get ready to track your business.</h4>
+                        <p class="mb-2 mt-1 text-white font-weight-400">Grow your business with us.</p>
+                    </div>
+                </div>
+                <div class="card border-0 rounded-10 mb-4" style="background-color: #ffffff96; box-shadow: 0px 0px 16px 8px #184c7c19;">
+                    <div class="card-header bg-light" style="border-bottom: 0px;">
+                        <div class="row text-center align-items-center m-auto justify-content-center mb-3">
+                            <img src="{% static 'assets/logo.png' %}" style="max-width: 150px;">
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <div id="alert-message" class="alert alert-danger text-center" role="alert" style="display: none;"></div>
+                        <form id="login-form" method="post" action="{% url 'user_login' %}">
+                            {% csrf_token %}
+                            <div class="form-group mb-4">
+                                <label for="id_email" class="mb-2">Email:</label>
+                                <input type="email" name="email" id="id_email" class="form-control" placeholder="Enter your Email" required>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label for="id_password" class="mb-2">Password:</label>
+                                <input type="password" name="password" id="id_password" class="form-control" placeholder="Enter your password" required>
+                            </div>
+                            <div class="form-group mb-2">
+                                <button type="submit" class="btn btn-success fs-16 fw-semibold text-dark heading-fornt py-2 py-md-3 px-4 text-white w-100">Login</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS (adjust the version as needed) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

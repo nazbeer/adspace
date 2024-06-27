@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Update Screen Type{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="mb-0">Update Screen Type</h4>
+    </div>
+    <div class="card-body">
+      <form method="post" id="screenTypeForm">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="name" class="mb-3">Name:</label>
+          <input type="text" id="name" name="name" class="form-control mb-3" value="{{ screen.name }}">
+        </div>
+        <div class="form-group">
+          <label for="description" class="mb-3">  Description:</label>
+          <textarea id="description" name="description" class="form-control mb-3">{{ screen.description }}</textarea>
+        </div>
+        <div class="form-group">
+          <label for="status" class="mb-3">Status:</label>
+          <select id="status" name="status" class="form-control mb-3">
+            <option value="active" {% if screen.status == 'active' %} selected {% endif %}>Active</option>
+            <option value="inactive" {% if screen.status == 'inactive' %} selected {% endif %}>Inactive</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function(e) {
+    e.preventDefault();
+    const screenId = '{{ screen.id }}';  // Pass the screen ID from the backend if available
+    console.log(screenId);
+    const url = `screen/screen_type/${screenId}/`;
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{ csrf_token }}'
+        }
+
+      })
+      // .then(response => response.json())
+      .then(data => {
+      console.log(response)
+        // document.getElementById('name').value = data.name;
+        // document.getElementById('description').value = data.description;
+        // document.getElementById('status').value = data.status;
+    })
+    .catch(error => console.error('Error:', error));
+  })
+</script>

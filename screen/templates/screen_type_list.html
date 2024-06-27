@@ -1,0 +1,86 @@
+<!-- screen_type_list.html -->
+
+{% extends 'base.html' %}
+{% block title %}Screen Type List{% endblock %}
+{% block content %}
+<div class="container mt-4">
+  
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  <div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h5 class="mb-0">Screen Type List</h5>
+      <div>
+        <a href="{% url 'screen_type_create' %}" class="btn btn-primary">Create Screen Type</a>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped nowrap" id="screenTypeList">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Status</th>
+              <th>Created On</th>
+              <th>Updated On</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for screen_type in screen_types %}
+              <tr>
+                <td>{{ screen_type.id }}</td>
+                <td>{{ screen_type.name }}</td>
+                <td>{{ screen_type.description }}</td>
+                <td>{{ screen_type.status }}</td>
+                <td>{{ screen_type.created_on }}</td>
+                <td>{{ screen_type.updated_on }}</td>
+                <td>
+                  <a href="{% url 'screen_type_detail' screen_type.id %}" class="btn btn-primary btn-sm">View</a>
+                  {%comment%}<!-- <a href="{% url 'screen_type_edit' screen_type.id %}" class="btn btn-info btn-sm">Edit</a> -->{%endcomment%}
+                  <!-- Add delete functionality if needed -->
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+<script>
+  $(document).ready(function() {
+    // Initialize DataTable
+    $('#screenTypeList').DataTable({
+      responsive: true,
+      dom: 'lBfrtip',
+      buttons: [
+        {
+          text: 'Print',
+          extend: 'print',
+          exportOptions: {
+            columns: [0, 1, 2, 3, 4, 5]
+          }
+        },
+        {
+          text: 'Export PDF',
+          extend: 'pdf',
+          exportOptions: {
+            columns: [0, 1, 2, 3, 4, 5]
+          }
+        }
+      ]
+    });
+  });
+</script>
+{% endblock %}

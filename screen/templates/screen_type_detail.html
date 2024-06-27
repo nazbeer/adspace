@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ screen_type.name }}</h1>
+  <p>Description: {{ screen_type.description }}</p>
+  <p>Status: {{ screen_type.get_status_display }}</p>
+  <p>Created: {{ screen_type.created_on }}</p>
+  <p>Updated: {{ screen_type.updated_on }}</p>
+
+{% endblock %}

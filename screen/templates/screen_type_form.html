@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+  <div class="card mt-4">
+    <div class="card-header">
+      <h4 class="card-title">{% if form.instance.pk %}Edit Screen Type{% else %}Create New Screen Type{% endif %}</h4>
+    </div>
+    <div class="card-body">
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          {{ form.name.label_tag }}
+          {{ form.name }}
+          {% if form.name.errors %}
+            <div class="text-danger">
+              {% for error in form.name.errors %}
+                <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+        <div class="form-group">
+          {{ form.description.label_tag }}
+          {{ form.description }}
+          {% if form.description.errors %}
+            <div class="text-danger">
+              {% for error in form.description.errors %}
+                <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+        <div class="form-group">
+          {{ form.status.label_tag }}
+          {{ form.status }}
+          {% if form.status.errors %}
+            <div class="text-danger">
+              {% for error in form.status.errors %}
+                <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
