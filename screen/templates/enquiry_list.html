@@ -1,0 +1,12 @@
+<!-- enquiry_list.html -->
+{% extends 'base.html' %}
+{% block content %}
+<h2>Enquiries</h2>
+<ul>
+  {% for enquiry in enquiries %}
+    <li>{{ enquiry.subject }}</li>
+  {% empty %}
+    <li>No enquiries found.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

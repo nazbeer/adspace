@@ -1,0 +1,12 @@
+<!-- tshirtsize_list.html -->
+{% extends 'base.html' %}
+{% block content %}
+<h2>T-Shirt Sizes</h2>
+<ul>
+  {% for size in sizes %}
+    <li>{{ size.name }}</li>
+  {% empty %}
+    <li>No T-Shirt sizes found.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

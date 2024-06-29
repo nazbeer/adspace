@@ -29,4 +29,14 @@ urlpatterns = [
     path('areas/', area_list, name='area_list'),
     path('areas/<int:pk>/', area_detail, name='area_detail'),
     path('areas/create/', area_create, name='area_create'),
+
+     path('subcategories/', subcategory_list, name='subcategory-list'),
+    path('subcategories/create/', subcategory_create, name='subcategory-create'),
+    path('tshirtsizes/', tshirtsize_list, name='tshirtsize-list'),
+    path('tshirtsizes/create/', tshirtsize_create, name='tshirtsize-create'),
+    path('catalogs/', catalog_list, name='catalog-list'),
+    path('catalogs/create/', catalog_create, name='catalog-create'),
+    path('enquiries/', enquiry_list, name='enquiry-list'),
+    path('enquiries/create/', enquiry_create, name='enquiry-create'),
+  
 ]

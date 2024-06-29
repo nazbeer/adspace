@@ -1,0 +1,12 @@
+<!-- subcategory_list.html -->
+{% extends 'base.html' %}
+{% block content %}
+<h2>Subcategories</h2>
+<ul>
+  {% for subcategory in subcategories %}
+    <li>{{ subcategory.name }}</li>
+  {% empty %}
+    <li>No subcategories found.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

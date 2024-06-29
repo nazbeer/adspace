@@ -1,0 +1,12 @@
+<!-- catalog_list.html -->
+{% extends 'base.html' %}
+{% block content %}
+<h2>Catalogs</h2>
+<ul>
+  {% for catalog in catalogs %}
+    <li>{{ catalog.description }}</li>
+  {% empty %}
+    <li>No catalogs found.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

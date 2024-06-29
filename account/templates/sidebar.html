@@ -1,7 +1,26 @@
+<!-- sidebar.html -->
 <ul id="font-c">
     <li><a href="{% url 'home' %}">Home</a></li>
     <li><a href="{% url 'screen_type_list' %}">Screen Types</a></li>
-    
     <li><a href="{% url 'area_list' %}">Areas</a></li>
-    
+    <li><a href="{% url 'subcategory-list' %}">Subcategories</a>
+        <ul>
+            <li><a href="{% url 'subcategory-create' %}">Create Subcategory</a></li>
+        </ul>
+    </li>
+    <li><a href="{% url 'tshirtsize-list' %}">T-Shirt Sizes</a>
+        <ul>
+            <li><a href="{% url 'tshirtsize-create' %}">Create T-Shirt Size</a></li>
+        </ul>
+    </li>
+    <li><a href="{% url 'catalog-list' %}">Catalogs</a>
+        <ul>
+            <li><a href="{% url 'catalog-create' %}">Create Catalog Entry</a></li>
+        </ul>
+    </li>
+    <li><a href="{% url 'enquiry-list' %}">Enquiries</a>
+        <ul>
+            <li><a href="{% url 'enquiry-create' %}">Create Enquiry</a></li>
+        </ul>
+    </li>
 </ul>

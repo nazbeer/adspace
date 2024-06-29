@@ -338,3 +338,77 @@ def area_create(request):
         form = AreaForm()
     
     return render(request, 'area_create.html', {'form': form})
+
+
+def category_list(request):
+    categories = Category.objects.all()
+    return render(request, 'category_list.html', {'categories': categories})
+
+def category_create(request):
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('category-list')
+    else:
+        form = CategoryForm()
+    return render(request, 'category_form.html', {'form': form})
+
+
+
+def subcategory_list(request):
+    subcategories = SubCategory.objects.all()
+    return render(request, 'subcategory_list.html', {'subcategories': subcategories})
+
+def subcategory_create(request):
+    if request.method == 'POST':
+        form = SubCategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('subcategory-list')
+    else:
+        form = SubCategoryForm()
+    return render(request, 'subcategory_form.html', {'form': form})
+
+def tshirtsize_list(request):
+    sizes = TShirtSize.objects.all()
+    return render(request, 'tshirtsize_list.html', {'sizes': sizes})
+
+def tshirtsize_create(request):
+    if request.method == 'POST':
+        form = TShirtSizeForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('tshirtsize-list')
+    else:
+        form = TShirtSizeForm()
+    return render(request, 'tshirtsize_form.html', {'form': form})
+
+def enquiry_list(request):
+    enquiries = Enquiry.objects.all()
+    return render(request, 'enquiry_list.html', {'enquiries': enquiries})
+
+def enquiry_create(request):
+    if request.method == 'POST':
+        form = EnquiryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('enquiry-list')
+    else:
+        form = EnquiryForm()
+    return render(request, 'enquiry_form.html', {'form': form})
+
+def catalog_list(request):
+    catalogs = Catalog.objects.all()
+    return render(request, 'catalog_list.html', {'catalogs': catalogs})
+
+def catalog_create(request):
+    if request.method == 'POST':
+        form = CatalogForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('catalog-list')
+    else:
+        form = CatalogForm()
+    return render(request, 'catalog_form.html', {'form': form})
+
